@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<!-- Main Section -->
+<main class="formPage my-xl">
+    <div class="content-box">
+        <div class="formWrapper">
+            <a style="background-color: orange;" class="backButton" href="{{request.GET.next}}"><svg xmlns="http://www.w3.org/2000/svg"
+                width="24" height="24" viewBox="0 0 24 24">
+                <path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z" />
+            </svg></a>
+            <br>
+
+            <form class="form" method="POST" action="">
+                {% csrf_token %}
+                <p style="font-weight: 500;">Are your sure you want to delete "{{object}}" skill on your profile?</p>
+                <input style="color: black;" class="btn btn--sub btn--lg  my-md" type="submit" value="Confirm"/>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock %}
