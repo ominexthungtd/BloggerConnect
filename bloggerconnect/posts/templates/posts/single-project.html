@@ -1,0 +1,71 @@
+{% extends "main.html" %}
+{% block content%}
+<main class="singleProject" style="background-color: #1f1e1e; min-height: 100vh;">
+    <div class="container" style="padding-top: 50px;">
+        <div class="layout">
+            <div class="column column--1of3">
+                <h3 style="color: white;" class="singleProject__subtitle">Tools & Stacks</h3>
+                <div class="singleProject__toolStack">
+                    {% for tag in post.tags.all %}
+                    <span class="tag tag--pill tag--sub tag--lg"><small>{{tag}}</small></span>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="column column--2of3">
+                <a style="color: orange" href="{% url 'user-profile' post.owner.id %}"
+                    class="singleProject__developer">{{post.owner.name}}</a>
+                <h2 class="singleProject__title">{{post.title}}</h2>
+                <h3 style="color: white;" class="singleProject__subtitle">About the Post</h3>
+                <div class="singleProject__info" style="max-width: 850px; background-color: #1f1e1e">
+                    {{post.content | safe}}
+                </div>
+                <div class="comments">
+                    <h3 style="color: white;" class="singleProject__subtitle">Feedback</h3>
+                    <h5 style="color: #e5e7eb;" class="project--rating">
+                        {{post.vote_ratio}}% Postitive Feedback ({{post.vote_total}}
+                        Vote{{post.vote_total|pluralize:"s"}})
+                    </h5>
+                    {% if request.user.profile.id in post.reviewers %}
+                    <p style="color: #e5e7eb;">You have already submitted your review for this project</p>
+                    {% elif request.user.profile == post.owner %}
+                    <p style="color: #e5e7eb;">You can not review your own work</p>
+                    {% elif request.user.is_authenticated %}
+                    <form class="form" action="{% url 'post' post.id %}" method="POST">
+                        {% csrf_token %}
+                        {% for field in form %}
+                        <div class="form__field">
+                            <label for="formInput#textarea">{{field.label}}</label>
+                            {{field}}
+                        </div>
+                        {% endfor %}
+                        <input class="btn btn--sub btn--lg" type="submit" value="Add Review" style="color: black;" />
+                    </form>
+                    {% else %}
+                    <a href="{% url 'login' %}?next={{request.path}}" style="color: orange;">Please log in to leave a
+                        review</a>
+                    {% endif %}
+                    <div class="commentList">
+                        {% for review in post.review_set.all %}
+                        {% if review.body %}
+                        <div class="comment">
+                            <a href="{% url 'user-profile' review.owner.id %}">
+                                <img class="avatar avatar--md" src="{{review.owner.profile_image.url}}" alt="user" />
+                            </a>
+                            <div class="comment__details">
+                                <a style="color: orange;" href="{% url 'user-profile' review.owner.id %}"
+                                    class="comment__author">{{review.owner.name}}</a>
+                                <p style="color: #e5e7eb;" class="comment__info">
+                                    {{review.body|linebreaksbr}}
+                                </p>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</main>
+{% endblock %}
