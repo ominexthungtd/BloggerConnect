@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+{% block content%}
+<main class="formPage my-xl">
+    <div class="content-box">
+        <div class="formWrapper">
+            <!-- <a class="backButton" href="{% url 'user-profile' recipient.id %}"><i class="im im-angle-left"></i></a> -->
+            <a style="background-color: orange;" class="backButton" href="{% url 'user-profile' recipient.id %}"><svg
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z" />
+                </svg></a>
+            <br>
+
+            <form class="form" method="POST">
+                {% csrf_token %}
+                {% if request.user.is_authenticated == False %}
+                <div class="form__field">
+                    <label for="formInput#text" style="font-weight: 500; color: black">Your name:</label>
+                    {{form.name}}
+                </div>
+                <div class="form__field">
+                    <label for="formInput#text" style="font-weight: 500; color: black">Your email:</label>
+                    {{form.email}}
+                </div>
+                {% endif %}
+                <div class="form__field">
+                    <!-- <label for="formInput#text">{{form.subject.label}}</label> -->
+                    <label for="formInput#text" style="font-weight: 500; color: black">Your message's title:</label>
+                    {{form.subject}}
+                </div>
+                <div class="form__field">
+                    <!-- <label for="formInput#text">{{form.body.label}}</label> -->
+                    <label for="formInput#text" style="font-weight: 500; color: black">Your message:</label>
+                    {{form.body}}
+                </div>
+                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Send" style="color: black" />
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock %}
