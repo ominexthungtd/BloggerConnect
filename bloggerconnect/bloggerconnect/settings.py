@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = 'django-insecure-x6z*-@k*7)3&a1oq=yieyyd&x=ts+!m)s(py3d9zc54dc^urmb
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -42,7 +40,56 @@ INSTALLED_APPS = [
     "corsheaders",
     "tinymce",
 ]
-
+TINYMCE_DEFAULT_CONFIG = {
+    "height": "750px",
+    "width": "860px",
+    "menubar": "file edit view insert format tools table help",
+    "plugins": "advlist autolink lists link image charmap print preview hr anchor searchreplace visualblocks code "
+               "fullscreen insertdatetime media table paste code help wordcount codesample emoticons",
+    "toolbar": "undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft "
+               "aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor "
+               "backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | "
+               "fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | "
+               "a11ycheck ltr rtl | showcomments addcomment code | autolink lists link | emoticons ",
+    "custom_undo_redo_levels": 10,
+    "language": "en_US",
+    "skin": "myskin",
+    "skin_url": "/static/tinymce/skins/myskin",
+    'fontsize_formats': "1px 2px 3px 4px 5px 6px 7px 8px 9px 10px 11px 12px 13px 14px 15px 16px 17px 18px 19px 20px"
+                        "21px 22px 23px 24px 25px 26px 27px 28px 29px 30px 31px 32px 33px 34px 35px 36px 37px 38px 39px 40px",
+    'font_formats': "Inter=inter,san-serif;" +
+                    "Andale Mono=andale mono,times;" +
+                    "Arial=arial,helvetica,sans-serif;" +
+                    "Arial Black=arial black,avant garde;" +
+                    "Book Antiqua=book antiqua,palatino;" +
+                    "Comic Sans MS=comic sans ms,sans-serif;" +
+                    "Courier New=courier new,courier;" +
+                    "Georgia=georgia,palatino;" +
+                    "Helvetica=helvetica;" +
+                    "Impact=impact,chicago;" +
+                    "Symbol=symbol;" +
+                    "Tahoma=tahoma,arial,helvetica,sans-serif;" +
+                    "Terminal=terminal,monaco;" +
+                    "Times New Roman=times new roman,times;" +
+                    "Trebuchet MS=trebuchet ms,geneva;" +
+                    "Verdana=verdana,geneva;" +
+                    "Webdings=webdings;" +
+                    "Wingdings=wingdings,zapf dingbats",
+    'codesample_languages': [
+        {'text': 'HTML/XML', 'value': 'markup'},
+        {'text': 'JavaScript', 'value': 'javascript'},
+        {'text': 'CSS', 'value': 'css'},
+        {'text': 'PHP', 'value': 'php'},
+        {'text': 'Ruby', 'value': 'ruby'},
+        {'text': 'Python', 'value': 'python'},
+        {'text': 'Java', 'value': 'java'},
+        {'text': 'C', 'value': 'c'},
+        {'text': 'C#', 'value': 'csharp'},
+        {'text': 'C++', 'value': 'cpp'},
+        {'text': 'Django', 'value': 'python'},
+        {'text': 'Shell', 'value': 'shell'},
+    ],
+}
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -73,7 +120,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bloggerconnect.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
@@ -87,7 +133,6 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -106,7 +151,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
